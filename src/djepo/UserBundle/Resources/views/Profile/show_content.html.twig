@@ -1,0 +1,32 @@
+<div class="fos_user_user_show">
+
+   <div> {{ 'profile.show.username'|trans({}, 'djepoUserBundle') }}: {{ user.username }}</div> 
+   <div> {{ 'profile.show.email'|trans({}, 'djepoUserBundle') }}: {{ user.email }}</div> 
+ 
+   <div> {{ 'fos_user_profile_form_lastname'|trans({}, 'djepoUserBundle') }}: {{ user.lastname }}</div> 
+   <div> {{ 'fos_user_profile_form_firstname'|trans({}, 'djepoUserBundle') }}: {{ user.firstname }}</div> 
+    
+   <h3>Votre profil</h3> 
+<div>{{ 'fos_user_profile_form_dateN'|trans({}, 'djepoUserBundle') }}: {{user.dateN }}</div> 
+<div>{{ 'fos_user_profile_form_typeEntite'|trans({}, 'djepoUserBundle') }}: {{user.typeEntite }}</div> 
+<div>{{ 'fos_user_profile_form_telFixe'|trans({}, 'djepoUserBundle') }}: {{user.telFixe }}</div> 
+<div>{{ 'fos_user_profile_form_telPortable'|trans({}, 'djepoUserBundle') }}: {{user.telPortable }}</div> 
+<div>{{ 'fos_user_profile_form_fax'|trans({}, 'djepoUserBundle') }}: {{user.fax }}</div> 
+
+
+<div>{{ 'fos_user_profile_form_adresse_numeroVoie'|trans({}, 'djepoUserBundle') }}: {{user.adresse.numeroVoie }}</div> 
+<div>{{ 'fos_user_profile_form_adresse_libelleAdd'|trans({}, 'djepoUserBundle') }}: {{user.adresse.libelleAdd }}</div> 
+<div>{{ 'fos_user_profile_form_adresse_codePostal'|trans({}, 'djepoUserBundle') }}: {{user.adresse.codePostal }}</div> 
+<div>{{ 'fos_user_profile_form_adresse_ville_nomVille'|trans({}, 'djepoUserBundle') }}: {{user.adresse.ville.nomVille }}</div> 
+<div>{{ 'fos_user_profile_form_adresse_ville_libelle'|trans({}, 'djepoUserBundle') }}: {{user.adresse.ville.libelle }}</div> 
+    
+ 
+    
+  <div>
+      <fieldset>
+			<a href="{{ path('fos_user_profile_edit') }}">  Back to the list  </a>
+	 </fieldset>
+   </div>
+    
+</div>
+

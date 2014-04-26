@@ -1,0 +1,17 @@
+{% extends "djepoUserBundle::layout.html.twig" %}
+
+{% block meta %} 
+	 <meta name="description" content="Logementpourtous  : Entrer nouveau mot de passe">
+	 <meta name='ROBOTS' content="noindex,nofollow">
+	  {% endblock %}
+	{% block title %} {{ parent()   ~' - Nouveau mot de passe ' }}  {% endblock %}
+
+{% block navigsite %}
+       <a href="{{ path('djepoMain_accueil') }}"> {{ parent() }} </a>
+         <a href="{{ path('djepoUser_profile') }}"> > Admin </a> > Nouveau mot de passe
+{% endblock %} 
+  
+{% block fos_user_content %}
+<br><br>
+{% include "djepoUserBundle:Resetting:reset_content.html.twig" %}
+{% endblock fos_user_content %}

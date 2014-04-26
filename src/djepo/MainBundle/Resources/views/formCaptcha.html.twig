@@ -1,0 +1,19 @@
+
+            {% block captcha_widget %}
+					 {% spaceless %}
+					 <div data-role="fieldcontain" >
+						 <fieldset data-role="controlgroup">
+					      <legend>  </legend>
+					      
+					
+					  {{ form_label(form.captcha, "Entrez les 6 caractères (majuscules ou chiffres) contenus dans l'image") }}
+					        <span class="ast"> *  {{ form_widget(form.captcha) }}</span>
+		    				<span class="ast">  {{ form_errors(form.captcha) }}</span>
+								<br>  Si vous êtes dans l'incapacité de lire plusieurs images 
+									 d'affilée, 
+								     <a href="{{ path('SdkProjetTravaux_contact') }}">contactez-nous.</a>
+						 </fieldset>
+				   </div>
+					
+				{% endspaceless %}
+			{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "djepoUserBundle::layout.html.twig" %}
+
+    {% block meta %} 
+             <meta name="description" content="Logementpourtous.com : demande de modification de mot de passe">
+             <meta name='ROBOTS' content="noindex,nofollow">
+     {% endblock %}
+     {% block title %} {{ parent()   ~' - Attente confirmation de modification de mot de passe ' }}  {% endblock %}
+
+    {% block navigsite %}
+           <a href="{{ path('SdkProjetTravaux_accueil') }}"> {{ parent() }} </a>
+           <a href="{{ path('SdkProjetTravaux_profile') }}"> > Admin </a>
+            > Attente confirmation de modification de mot de passe 
+    {% endblock %} 
+
+    {% block fos_user_content %}
+    <br><br><br>
+    <div>
+    <p> {{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}</p>
+    </div>
+{% endblock %}
+

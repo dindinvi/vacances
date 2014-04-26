@@ -1,0 +1,21 @@
+ <div class ="titre_Connexion_H_arrondi"> &nbsp;&nbsp;Mon profil  </div>
+	<ul>
+	     <li><a href="{{ path('fos_user_profile_show', { 'id' : app.user.id })  }}">Voir mon profil actuel</a></li> <!-- 'id' : app.user.id-->
+	    <li><a href="#">Modifier mes coordonnées</a></li>
+	    <li><a href="{{ path('djepoUser_delete')  }}">Supprimer mon compte</a></li>
+	</ul> 
+	
+             <br><br>
+	<div class ="titre_Connexion_H_arrondi"> &nbsp;&nbsp;Identifiants </div>
+	 <ul>
+	     <li><a href="{{ path('djepoUser_changeMail') }}">Modifier mon adresse e-mail</a></li>
+	     <li><a href="{{ path('fos_user_resetting_request') }}">Modifier mon mot de passe</a></li>
+	</ul> 
+ 
+      <br><br>
+	<div class ="titre_Connexion_H_arrondi"> &nbsp;&nbsp;Mes Projets  </div>
+	 <ul>
+             <li><a href="#">Mes projets en cours</a></li>
+	 </ul>
+
+ 

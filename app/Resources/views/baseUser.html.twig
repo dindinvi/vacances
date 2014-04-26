@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% block meta %}  {% endblock %}
+            <title>{% block title %} {{ websiteName}} {% endblock %}</title>
+                  
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/djepobootstrap/css/bootstrap.css') }}" type="text/css" />
+	    {# Latest compiled and minified CSS 
+               <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+             #}
+
+            <link media="all" href="{{asset('bundles/djepomain/css/style.css')}}" type="text/css" rel="stylesheet">
+            <style> body { padding-top: 40px; }   </style>
+          {% endblock %}
+        {% block header_javascripts %} 
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+     </head>
+	
+     <body>
+        <div class="container">
+            <header class="row">
+                 {% block header %}
+                 <div class="col-lg-4"> {# logo PAYEMENT #}  </div>
+                <div class="col-lg-8">  {# header_droite #} 
+                      {% if is_granted("IS_AUTHENTICATED_FULLY") %}  {{ app.user.username }} - 
+                          <a href="{{ path('djepoUser_profile') }}"   rel="nofollow"> Gérer mon compte </a>  |
+                          {# L'utilisateur est-il admin ? #}
+                           {% if is_granted('ROLE_ADMIN') %} <a href="">Administration</a> |  {% endif %}
+                              <a href="{{ path('fos_user_security_logout') }}"   rel="nofollow">Déconnexion</a> 
+                      {% else %}
+                               <a href="{{ path('fos_user_inscription_register') }}"   rel="nofollow"> Inscription</a> |
+                               <a href="{{ path('fos_user_connexion') }}"  rel="nofollow">Connexion</a>
+                      {% endif %}	
+                   
+                 </div>
+                 <div class="col-lg-4"> 
+                       <a href="{{ path('djepoMain_accueil') }}">
+                             <img src="{{ asset('bundles/djepobootstrap/images/logo.jpg') }}" alt="{{websiteName}}" width="404" height="105">  
+                        </a>
+                </div>
+                 <div class="col-lg-8">    {# PUB LOGEMENT POUR TOUS #}
+                          <a href="{{ path('djepoMain_accueil') }}">
+                             <img src="{{ asset('bundles/djepobootstrap/images/logo.jpg') }}" alt="{{websiteName}}" width="404" height="105">  
+                        </a>
+                 </div>
+                 
+                <div class="col-lg-12">
+                    <div class="masthead">
+                        <h3 class="text-muted">Project name</h3>
+                            <ul class="nav nav-justified">
+                                 <li class="active"><a href="#">Home</a></li>
+                                 <li><a href="{{ path('djepoMain_accueil') }}"><b>Accueil</b></a></li>
+                                <li><a href="{{ path('djepoMain_about') }}"><b>Qui nous sommes</b></a></li>
+                                <li><a href="{{ path('djepoMain_contact') }}"  rel="nofollow" ><b>Contact</b></a></li>
+                           </ul>
+                   </div>
+                </div>
+               
+             {% endblock %}    
+            </header>
+            <div class="row">{# corp body #}
+                <div class="col-lg-9">
+                       <div class="row">  {% block navigsite %} {% endblock %}  </div> 
+                        <div> {% block principal %}	 {% endblock %} </div>
+                         
+                </div>
+                <div class="col-lg-3">
+                           {% block droite %}  {% include "djepoMainBundle::menuDroite.html.twig" %}    {% endblock %} 
+                </div>
+                
+            </div>
+                
+                <div class="row">
+                        <p class="text-muted">
+                            {% block pied %} Copyright @ 2012. All rights reserveds.<br> 
+                                    Contact: <a href="#">webmaster</a> {# A FAIRE #}
+                            {% endblock %}
+                        </p>
+                </div>
+     
+        {% block javascripts %}
+      <script type="text/javascript" src="{{ asset('bundles/djepobootstrap/js/bootstrap.min.js') }}"></script>
+      {#  Latest compiled and minified JavaScript
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+#}
+{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,27 @@
+{% extends "djepoMainBundle::layout.html.twig" %}
+
+{% block navigsite %} {{ parent() }} {% endblock %} 
+
+{% block principal %}	
+     {# On affiche tous les messages flash #}
+	                        
+	            {% if app.session.hasFlash('blogger-architecte') %}
+		             <br>  <br>
+		             
+				     <div class="cadre">
+		                  
+		                  <br>{{ app.session.flash('blogger-architecte') }} <br>  <br>
+                     </div>
+				     <br>
+			  {% endif %} 
+			  
+	           {% if app.session.hasFlash('projet_def') %}
+		             <br>  <br>
+				    <div class="cadre"  >
+				      <br>  {{ app.session.flash('projet_def') }} <br> <br>
+				    </div>
+				     <br>
+			  {% endif %}
+   <br> <br> 
+      
+{% endblock %}

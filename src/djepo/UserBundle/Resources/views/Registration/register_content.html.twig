@@ -1,0 +1,90 @@
+<div class="row">
+<div class="col-lg-offset-1 col-lg-8">
+    <br>  <em> <span class="ast"> * </span>tous les Champs sont obligatoires</em> <br><br>				
+    <form class="form-signin"  role="form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+	 <!-- Les erreurs g�n�rales du formulaire. -->
+	
+	 <h3>Votre profil</h3>   
+		<div> 
+                    <fieldset>                      
+			<div>  {{ form_row(form.username) }}</div>
+			                        
+                         <div>
+                               <span > {{ form_label(form.plainPassword.first, 'Votre mot de passe *') }}</span>
+                               {{ form_widget(form.plainPassword.first) }}
+                                <span class="help-block alert-danger">{{ form_errors(form.plainPassword.first) }}</span>
+                               
+                         </div>
+                          <div>
+                               <span> {{ form_label(form.plainPassword.second, 'Vérification*') }}</span>
+                               {{ form_widget(form.plainPassword.second) }}
+                                <span class="help-block alert-danger">{{ form_errors(form.plainPassword.second) }}</span>
+                                 
+                          </div>
+                                <br/>
+                            <div>
+                               <span> {{ form_label(form.firstname, 'Votre Prénom*') }}</span>
+                               <span class="form-control">{{ form_widget(form.firstname) }}</span> 
+                                <span class="help-block alert-danger">{{ form_errors(form.firstname) }}</span>
+                                 
+                          </div>
+                          
+                          <div>
+                               <span> {{ form_label(form.lastname, 'Votre Nom*') }}</span>
+                               <span class="form-control">{{ form_widget(form.lastname) }}</span> 
+                                <span class="help-block alert-danger">{{ form_errors(form.lastname) }}</span>
+                                 
+                          </div> 
+			 <div> {{ form_row(form.typeEntite) }} </div>
+		
+						    
+			 <div>
+				 {{ form_errors(form.email.first) }}
+				 {{ form_label(form.email.first) }}
+				 {{ form_widget(form.email.first) }}
+			 </div>
+			 <div>
+				 {{ form_errors(form.email.second) }}
+				 {{ form_label(form.email.second) }}
+				 {{ form_widget(form.email.second) }}
+			 </div>
+                  </fieldset> 
+		 </div> <br/><br>
+                 
+                           
+		 <h3 >Adresse</h3>
+                  <div class="Adresse">
+                                 <div>  {{ form_row(form.adresse.numeroVoie) }}  </div>
+				 <div>  {{ form_row(form.adresse.libelleAdd) }}  </div>
+                                <div>  {{ form_row(form.adresse.codePostal) }}  </div>
+                  </div>
+                 
+		 <div class="ville">
+                         	
+                                <div>  {{ form_row(form.adresse.ville.nomVille) }}  </div>
+				 <div>  {{ form_row(form.adresse.ville.libelle) }}  </div>  
+                                 
+		  </div>  <br/><br>
+                  <div class="user">
+                      <div>  {{ form_row(form.telFixe) }}  </div>
+			  <div>  {{ form_row(form.telPortable) }}  </div>
+                        <div>  {{ form_row(form.fax) }}  </div>
+                
+                        
+                  </div>  <br/><br>
+		 <h3 >Protection anti-robot</h3><br>
+		<div>	
+			 <br/><br>
+		</div>
+			{{ form_rest(form) }}
+			
+		  <div>
+			 <fieldset>
+			   <legend>  </legend>
+			      <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" /> 
+			  </fieldset>
+		 </div>
+	</form>
+</div>
+</div>
+

@@ -1,0 +1,27 @@
+
+{% block field_errors %}
+{% spaceless %}
+    <span class="help-block alert-danger">
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                {{ error }}<br />
+            {% endfor %}
+        {% endif %}
+    </span>
+{% endspaceless %}
+{% endblock field_errors %}
+ 
+{% block field_row %}
+{% if errors|length > 0 %}error{% endif %}
+    <div class="input-group input-group-lg clearfix">
+        <span> {{ form_label(form, label) }}</span>
+        <div>
+                {% set class = '' %}
+                {% if errors|length > 0 %}
+                    {% set class = 'error' %}
+                {% endif %}
+                <span form-control input-lg>  {{ form_widget(form, { 'attr': { 'class': class } }) }}</span>
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock field_row %}

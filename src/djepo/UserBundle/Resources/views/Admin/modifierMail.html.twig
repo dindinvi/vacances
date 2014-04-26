@@ -1,0 +1,48 @@
+{% extends "djepoUserBundle::layout.html.twig" %}
+
+{% block meta %} 
+	 <meta name="description" content="Logementpourtous.com : Modifier mon adresse e-mail">
+	 <meta name='ROBOTS' content="noindex,nofollow">
+	  {% endblock %}
+{% block title %} {{ parent()  ~' - Modifier mon adresse e-mail ' }}  {% endblock %}
+{% block navigsite %}
+       <a href="{{ path('djepoMain_accueil') }}"> {{ parent() }} </a>
+        <a  href="{{ path('djepoUser_profile') }}"> > Admin </a>
+         >  Modifier mon adresse e-mail
+{% endblock %} 
+
+
+{% block fos_user_content %}	
+<br>
+    <h1>Changer mon adresse e-mail</h1>
+
+<br> Vous avez changé d'adresse e-mail ?
+<br> Vous devez d'abord taper 2 fois le nouvel e-mail que vous souhaitez utiliser.
+<br><br> 
+Votre adresse e-mail actuelle est : <b>{{ app.user.email }}</b>
+<br><br>
+	 <form action="{{ path('djepoUser_changeMail') }}"  method="post" {{ form_enctype(form) }}>
+		  <div class="admin"> 
+		     <div >
+			 <div class="ast">{{ form_errors(form.newMail.first) }}</div>
+				 {{ form_label(form.newMail.first, 'Votre nouvel e-mail : ') }}
+				 {{ form_widget(form.newMail.first) }}
+			 </div>
+                        <div>
+                          <div class="ast">	{{ form_errors(form.newMail.second) }}</div>
+                             {{ form_label(form.newMail.second, 'Retapez votre e-mail :') }}
+                            {{ form_widget(form.newMail.second) }}
+                       </div>
+		</div>
+			{{ form_rest(form) }}
+			
+	         <div>
+		        <fieldset>
+			    <legend>  </legend>
+			  <button type="submit">modifier mon adresse e-mail</button>
+					     </fieldset>
+				   </div>
+		</form>
+	
+	  
+{% endblock %}

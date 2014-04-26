@@ -1,0 +1,11 @@
+{% extends "djepoUserBundle::layout.html.twig" %}
+
+{% block navigsite %}
+       <a href="{{ path('djepoMain_accueil') }}"> {{ parent() }} </a> {{ ' > '~ ' afficher mon profil'  }}
+{% endblock %} 
+
+{% block fos_user_content %}
+    <h1><center>afficher mon profil</h1></center>
+	
+{% include "djepoUserBundle:Profile:show_content.html.twig" %}
+{% endblock fos_user_content %}

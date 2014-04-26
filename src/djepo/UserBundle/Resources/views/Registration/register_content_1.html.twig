@@ -1,0 +1,55 @@
+{# form_theme form 'djepoUserBundle::form_layout.html.twig' #}
+<div>
+    <br>  <em> <span class="ast"> * </span>tous les Champs sont obligatoires</em> <br><br>				
+    <form  class="well form-signin" role="form"  action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" >
+	 <!-- Les erreurs g�n�rales du formulaire. -->
+	
+	 <h3>Votre profil</h3>   
+		      <div class="user"> 
+                             {{ form_row(form.username) }}
+                              {{form_row(form.plainPassword.first) }}                       
+                           {{form_row(form.plainPassword.second) }}  
+                        </div>
+                        <div> {{ form_row(form.firstname) }}</div>
+                         
+			 <div> {{ form_row(form.lastname) }}</div>
+			 <div> {{ form_row(form.typeEntite) }} </div>
+		
+			  <div>  {{form_row(form.email.first) }}</div>                       
+                          <div>  {{form_row(form.email.second) }}</div> 			    
+                          <br/><br>
+                   <h3 >Adresse</h3>
+                  <div class="Adresse">
+                                 <div>  {{ form_row(form.adresse.numeroVoie) }}  </div>
+				 <div>  {{ form_row(form.adresse.libelleAdd) }}  </div>
+                                <div>  {{ form_row(form.adresse.codePostal) }}  </div>
+                  </div>
+                 
+		 <div class="ville">
+                         	
+                                <div>  {{ form_row(form.adresse.ville.nomVille) }}  </div>
+				 <div>  {{ form_row(form.adresse.ville.libelle) }}  </div>  
+                                 
+		  </div>  <br/><br>
+                  <div class="user">
+                      <div>  {{ form_row(form.telFixe) }}  </div>
+			  <div>  {{ form_row(form.telPortable) }}  </div>
+                        <div>  {{ form_row(form.fax) }}  </div>
+                
+                        
+                  </div>  <br/><br>
+		 <h3 >Protection anti-robot</h3><br>
+		<div>	
+			 <br/><br>
+		</div>
+			{{ form_rest(form) }}
+			
+		  <div>
+			 <fieldset>
+			   <legend>  </legend>
+			      <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" /> 
+			  </fieldset>
+		 </div>
+	</form>
+</div>
+

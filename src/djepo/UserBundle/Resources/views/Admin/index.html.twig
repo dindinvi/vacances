@@ -1,0 +1,39 @@
+{% extends "djepoUserBundle::layout.html.twig" %}
+
+{% block meta %} 
+	 <meta name="description" content="Logementpourtous.com: Index de l administration">
+	 <meta name='ROBOTS' content="noindex,nofollow">
+ {% endblock %}
+
+{% block title %} {{ parent() }}  {% endblock %}
+{% block navigsite %}
+       <a href="{{ path('djepoMain_accueil') }}"> {{ parent() }} </a> {{ ' > '~ ' Administration'  }}
+{% endblock %} 
+
+{% block fos_user_content %}
+    <h1><center>Index de l'administration</h1></center>
+	<p><center>Bienvenue dans votre espace membre.</center><br />
+	
+	   {# On affiche tous les messages flash #}
+	                        
+	            {% if app.session.hasFlash('admin-update') %}
+			    <div class="cadre">
+			        {{ app.session.flash('admin-update') }}
+			        
+			    </div>
+			  {% endif %}
+			  
+			   {% if app.session.hasFlash('admin-pass') %}
+			    <div class="cadre">
+			        {{ app.session.flash('admin-pass') }}
+			    </div>
+			  {% endif %}
+			  
+ 	
+
+<br>			  
+	<br>	
+		  
+{% include "djepoUserBundle:Admin:adminMenu_content.html.twig" %}
+<br><br>
+{% endblock %}

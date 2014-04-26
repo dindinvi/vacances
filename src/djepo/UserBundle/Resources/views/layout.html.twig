@@ -1,0 +1,25 @@
+{# src/djepo/UserBundle/Resources/views/layout.html.twig #}
+{% extends "::baseUser.html.twig" %}
+
+{% block title %} {{  parent() }} {% endblock %}
+{% block stylesheets %} {{ parent() }}  {% endblock %}
+ {% block header %} {{ parent() }} {% endblock %}	
+{% block navigsite %}  {{ djepo_home }} {% endblock %} 
+
+{% block principal %}
+        {% for key, message in app.session.getFlashes() %}
+            <div class="{{ key }}"> {# ajout css pour message en vert #}
+                {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
+        {% endfor %}
+        <div> {% block fos_user_content %}  {% endblock fos_user_content %}  </div>
+        <div>  {% block djepo_content %}  {% endblock djepo_content %}</div>
+    
+{% endblock %}
+    
+{% block droite %} {% include "djepoMainBundle::menuDroite.html.twig" %} {% endblock %} 							
+{% block pied %} 
+ {{ parent() }} 		
+{% endblock %}
+
+{% block javascripts %} {{ parent() }} {% endblock %}
