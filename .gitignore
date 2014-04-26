@@ -3,10 +3,10 @@
 */cache/*
 /web/uploads/*
 /web/bundles/*
-/app/build/api/*
-/app/build/coverage/*
-/app/build/code-browser/*
-/app/build/doc/*
+# /app/build/api/*
+# /app/build/coverage/*
+# /app/build/code-browser/*
+# /app/build/docs/*
 /vendor/*
 
 #netbeans
