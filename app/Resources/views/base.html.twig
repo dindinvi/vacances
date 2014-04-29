@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="fr">
     <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +21,12 @@
             <style> body { padding-top: 40px; }   </style>
           {% endblock %}
         {% block header_javascripts %} 
-             <!--[if lt IE 9]>
-          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+             <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                <!--[if lt IE 9]>
+                  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+                <![endif]-->
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" /> 
         <link rel="apple-touch-icon" href="{{ asset('bundles/djepobootstrap/images/apple-touch-icon.png') }}">
@@ -35,9 +38,9 @@
         <div class="container">
             <div class="row">
                  {% block header %}
-                 <div class="col-lg-4"> {# logo PAYEMENT #}  </div>
-                <div class="col-lg-8 pull-right">  {# header_droite #} 
-                      {% if is_granted("IS_AUTHENTICATED_FULLY") %}  {{ app.user.username }} - 
+                 <div class="col-lg-4"> logo PAYEMENT{# logo PAYEMENT #}  </div>
+                <div class="col-lg-8">  {# header_droite #} 
+                    <p class=" pull-right">  {% if is_granted("IS_AUTHENTICATED_FULLY") %}  {{ app.user.username }} - 
                           <a href="{{ path('djepoUser_profile') }}"   rel="nofollow"> Gérer mon compte </a>  |
                           {# L'utilisateur est-il admin ? #}
                            {% if is_granted('ROLE_ADMIN') %} <a href="">Administration</a> |  {% endif %}
@@ -46,7 +49,7 @@
                                      <a href="{{ path('fos_user_inscription_register') }}"   rel="nofollow"> Inscription</a> |
                                      <a href="{{ path('fos_user_connexion') }}"  rel="nofollow">Connexion</a>
                             {% endif %}	
-                   
+                    </p>
                  </div>
                  <div class="clearfix  visible-xs"></div>
                  <div class="col-lg-4"> 
@@ -57,7 +60,7 @@
                  <div class="col-lg-8">    {# PUB LOGEMENT POUR TOUS #}
                  
                        <a href="{{ path('djepoMain_accueil') }}">
-                             <img src="{{ asset('bundles/djepobootstrap/images/logo.jpg') }}" alt="{{websiteName}}" class="img-responsive">  
+                             <img src="{{ asset('bundles/djepobootstrap/images/logo.jpg') }}" alt="{{websiteName}}" class="img-responsive pull-right">  
                         </a>
                  </div>
                  <div class="clearfix  visible-xs"></div>
@@ -76,31 +79,34 @@
                 </div>
             <div class="clearfix visible-xs"></div>
             <div class="row">{# corp body #}
-                 <div class="col-lg-9">
-                     <div class="row"> {% block navigsite %} {% endblock %}  </div> 
-                     <div class="row">{% block principal %}	 {% endblock %} </div>
-                        
-                 </div>
+                 <div class="col-lg-9 navig_prin">
+                      {% block navigsite %} {% endblock %} 
+                      {% block principal %} {% endblock %} 
+                </div>
                 <div class="col-lg-3">
                            {% block droite %}  {% include "djepoMainBundle::menuDroite.html.twig" %}    {% endblock %} 
                 </div>
                 
             </div>
                 <div class="row">
-                    <p class="text-muted">
+                    <footer> <p class="text-muted">
                             {% block pied %} Copyright @ 2012. All rights reserveds.<br> 
                                     Contact: <a href="#">webmaster</a> {# A FAIRE #}
-                        </p>
+                        </p> </footer>
                    {% endblock %}
                 </div>
         </div>
         {% block javascripts %}
-      <script type="text/javascript" src="{{ asset('bundles/djepobootstrap/js/bootstrap.min.js') }}"></script>
-     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-     {#
-            <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-      #}
+              <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+              <script type="text/javascript" src="{{ asset('bundles/djepobootstrap/js/bootstrap.min.js') }}"></script>
+    
+     {#  
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+     #}
+
+      
 {% endblock %}
     </body>
 </html>

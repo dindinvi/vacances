@@ -4,13 +4,12 @@
 {% block title %} {{ parent() }} {% endblock %}
 {% block stylesheets %}  {{ parent() }} {% endblock %}
  {% block header %}    {{ parent() }} {% endblock %}
-{% block navigsite %} {{ djepo_home }} {% endblock %} 
 
+
+{% block navigsite %} <ol class="breadcrumb">  <li class="active">{{ djepo_home }} </li>  </ol>  {% endblock %} 
 {% block principal %}	{% endblock %} 
-{% block droite %}	
- {% include "djepoMainBundle::menuDroite.html.twig" %}
-{% endblock %} 
+
+{% block droite %} {% include "djepoMainBundle::menuDroite.html.twig" %} {% endblock %} 
 							
 {% block pied %}   {{ parent() }} 	{% endblock %}
-
-{% block javascripts %}		{{ parent() }} {% endblock %}
+{% block javascripts %}	 {{ parent() }} {% endblock %}

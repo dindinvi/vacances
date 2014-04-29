@@ -5,76 +5,58 @@
 
 {% block navigsite %}
           <ol class="breadcrumb">
-            <li> <a href="{{ path('djepoMain_accueil') }}"> {{ parent() }} </a> </li>
+            <li> <a href="{{ path('djepoMain_accueil') }}"> {{ djepo_home }} </a> </li>
             <li class="active">{{ djepo_contact }} </li>
         </ol>
  {% endblock %}
 
-{% block principal %}	
-	 {# On affiche tous les messages flash #}
+{% block principal %}
+       {# On affiche tous les messages flash #}
 	    {% if app.session.hasFlash('blogger-notice') %}
 		<div class="alert alert-info"> {{ app.session.flash('blogger-notice') }}  </div>
-	     {% endif %}<br><br>
+	     {% endif %}<br> 
+             
 	  <h1 class="page-header">Contactez-nous.</h1> 
-		<p class="lead">Si vous avez des questions ou besions de renseignements.Notre équipe est à votre écoute. <br></p>
-		<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          Collapsible Group Item #1
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-          Collapsible Group Item #2
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-          Collapsible Group Item #3
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-</div>
-                
-                
-                <h2> Par Email</h2>  
-                       <h3>Formulaire de contact</h3>
-                       {% include "djepoMainBundle:Contact:formulaire.html.twig" %}
-		  
-		   <h2> Par téléphone</h2>
-		      <address>
+          <div class="row">{# corp body #}
+                 <div class="col-lg-12">
+		<div class="panel-group ">
+                    <h2>Notre équipe est à votre écoute.</h2>
+                    <div class="panel panel-default">
+                      <div class="panel-heading"> 
+                        <h3 class="panel-title">
+                          <a class="accordion-toggle" href="{{ path('djepoMain_contact') ~ '#parmail' }}" data-toggle="collapse"> Par Email</a> 
+                        </h3>
+                      </div>
+                      <div id="parmail" class="panel-collapse collapse in">
+                        <div class="panel-body"> 
+                             <h4>Formulaire de contact</h4>
+                              {% include "djepoMainBundle:Contact:formulaire.html.twig" %}
+		            </div>
+                      </div>
+                    </div>
+                    
+                    <div class="panel panel-default">
+                      <div class="panel-heading"> 
+                        <h3 class="panel-title">
+                          <a class="accordion-toggle" href="{{ path('djepoMain_contact') ~ '#partel' }}" data-toggle="collapse"> Par téléphone </a> 
+                        </h3>
+                      </div>
+                      <div id="partel" class="panel-collapse collapse">
+                        <div class="panel-body"> 
+                            Si vous avez des questions ou besions de renseignements.
+                         <address>
                         <strong>Twitter, Inc.</strong><br>
                         795 Folsom Ave, Suite 600<br>
                         San Francisco, CA 94107<br>
                         <abbr title="Phone">Téléphone fixe:</abbr> 00228 XX XX XX XX
                         <abbr title="PhoneP">Téléphone portable:</abbr> 00228 XX XX XX XX
                       </address>
-	 
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            </div>
+                
 {% endblock %}
    

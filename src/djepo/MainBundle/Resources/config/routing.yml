@@ -8,10 +8,11 @@ djepoMain_accueil:
 
 djepoMain_contact:
     pattern:  /contact-location-togo
-    defaults: { _controller: djepoMainBundle:Contact:index , format: html }
+    defaults: { _controller: djepoMainBundle:Contact:index, format: html }
     requirements:
-        _method:  GET|POST
         format: html
+        _method:  GET|POST
+    
         
 djepoMain_about:
     pattern:  /qui-nous-sommes-togo
