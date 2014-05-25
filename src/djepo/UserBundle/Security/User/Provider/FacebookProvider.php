@@ -52,20 +52,23 @@ class FacebookProvider implements UserProviderInterface
         if (!empty($fbdata)) {            
             $user_by_mail=$this->userManager->findUserBy(array('email'=>$fbdata['email']));
             
-            if(!empty($user_by_mail))   //on se connecte avec fb, mais l'email est déjà présent dans la base (cas d'une personne déjà enregistrée auparavant)
+            if(!empty($user_by_mail))   //on se connecte avec fb, mais l'email est déjà présent dans la base
+            // (cas d'une personne déjà enregistrée auparavant)
             {
                 //il va falloir mettre à jour ce user
-                $user=$user_by_mail;              
+                $user=$user_by_mail;  
+                $exist = true;
             } elseif (empty($user)) 
             {    //si on a pas de user trouvé correspondant déjà à un user fb dans notre base (l'id facebook=un username de notre base de données)
                 //on crée un nouveau user                
                 $user = $this->userManager->createUser();
                 $user->setEnabled(true);
-                $user->setPassword('');                
+                $user->setPassword(''); 
+                $exist = false;
             }
 
             // TODO use http://developers.facebook.com/docs/api/realtime            
-            $user->setFBData($fbdata);            
+            $user->setFBData($fbdata,$exist);            
             
             if (count($this->validator->validate($user, 'Facebook'))) {
                 // TODO: the user was found obviously, but doesnt match our expectations, do something smart                

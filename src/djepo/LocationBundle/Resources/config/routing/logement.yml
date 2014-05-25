@@ -1,0 +1,30 @@
+logement:
+    pattern:  /
+    defaults: { _controller: "djepoLocationBundle:logement:index" }
+
+logement_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "djepoLocationBundle:logement:show" }
+
+logement_new:
+    pattern:  /new
+    defaults: { _controller: "djepoLocationBundle:logement:new" }
+
+logement_create:
+    pattern:  /create
+    defaults: { _controller: "djepoLocationBundle:logement:create" }
+    requirements: { _method: post }
+
+logement_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "djepoLocationBundle:logement:edit" }
+
+logement_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "djepoLocationBundle:logement:update" }
+    requirements: { _method: post|put }
+
+logement_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "djepoLocationBundle:logement:delete" }
+    requirements: { _method: post|delete }

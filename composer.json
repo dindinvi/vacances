@@ -21,7 +21,8 @@
         "friendsofsymfony/user-bundle": "*",
         "friendsofsymfony/facebook-bundle": "1.1.*",
         "jms/debugging-bundle": "dev-master",
-        "mayflower/php-codebrowser": "~1.1"
+        "mayflower/php-codebrowser": "~1.1",
+        "gregwar/captcha-bundle": "dev-master"
     },
     "require-dev": {
         "sebastian/phpcpd": "*",

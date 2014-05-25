@@ -1,7 +1,4 @@
 # src/djepo/kickStart/Resources/config/routing.yml
 
-djepoKickStart_accueil:
-    path: /hello/{name}
-    defaults: { _controller: djepoKickStartBundle:Default:index }
-    
+
     

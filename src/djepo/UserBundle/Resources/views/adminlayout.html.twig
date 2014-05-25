@@ -1,0 +1,38 @@
+{# src/djepo/UserBundle/Resources/views/ADMINlayout.html.twig #}
+{% extends "::baseUser.html.twig" %}
+
+{% block title %} {{  parent() }} {% endblock %}
+{% block stylesheets %} {{ parent() }}  {% endblock %}
+ {% block header %} {{ parent() }} {% endblock %}	
+{% block navigsite %} <ol class="breadcrumb">  <li class="active">{{ djepo_home }} </li>  </ol>  {% endblock %} 
+
+{% block principal %}
+ {% for label, flashes in app.session.flashbag.all %}
+    {% for flash in flashes %}
+         <div class="{% if label == 'warning'%} alert alert-warning 
+                      {% else %} alert alert-success
+                     {% endif %}">
+       {# <div class="alert alert-{{ label }}"> #}
+            {{ flash |trans({}, 'djepoUserBundle') }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+       {#
+{% for key, message in app.session.flashbag.all() %}
+        <div class="alert col-sm-12 alert-{{ key }}">
+        {{ message|trans({}, 'djepoUserBundle') }}
+        </div>
+        {% endfor %}
+ #}
+         {% block fos_user_content %}  {% endblock fos_user_content %} 
+         {% block djepo_content %}  {% endblock djepo_content %} 
+    
+{% endblock %}
+    
+{% block droite %} {% include "djepoMainBundle::menuDroite.html.twig" %} {% endblock %} 							
+{% block pied %} 
+ {{ parent() }} 		
+{% endblock %}
+
+{% block javascripts %} {{ parent() }} {% endblock %}

@@ -28,16 +28,17 @@ class adminHandler
 	{
 		if( $this->request->getMethod() == 'POST' )
 		{
-			     $this->form->bindRequest($this->request);
-		
-					if( $this->form->isValid() )	{
-						     $this->onSuccess($this->form->getData());
-						     return true;
-				   }
-					else {
-						$this->flash->setFlash('admin-pass', 'ECHEC DE VOTRE modification d');
-						return false	;	
-					}	
+			 $this->form->bindRequest($this->request);
+			if( $this->form->isValid() )	{
+			     $this->onSuccess($this->form->getData());
+			     return true;
+		        }
+		 else {
+			 $this->flash->setFlash('warning', 'admin.flash.warning');
+			//etape 2
+                        //$this->flash->setFlash('admin-pass', 'Echec de la modification de votre mail');	 
+                         return false	;	
+			 }	
 		}
 
    }
@@ -47,8 +48,9 @@ class adminHandler
 	{
 		
 		$this->flash->set('user_mail',$admin->getNewMail());
-		
-		$this->flash->setFlash('admin-pass', 'Votre modification à été bien prise en compte!');
+		//etape 2
+                //$this->flash->setFlash('admin-pass', 'Votre modification à été bien prise en compte');
+		$this->flash->setFlash('success', 'admin.flash.success');
 		
 	}
 }

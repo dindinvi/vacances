@@ -23,8 +23,11 @@ class AppKernel extends Kernel
             new FOS\FacebookBundle\FOSFacebookBundle(),
             new djepo\UserBundle\djepoUserBundle(),
             new djepo\MainBundle\djepoMainBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new djepo\KickStartBundle\djepoKickStartBundle(),
             new djepo\BootStrapBundle\djepoBootStrapBundle(),
+            new djepo\LocationBundle\djepoLocationBundle(),
+            new djepo\PrestationBundle\djepoPrestationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {            

@@ -1,39 +1,31 @@
-{% extends "djepoUserBundle::layout.html.twig" %}
+{% extends "djepoUserBundle::adminlayout.html.twig" %}
 
 {% block meta %} 
-	 <meta name="description" content="Logementpourtous.com: Index de l administration">
+	 <meta name="description" content=" Index de l administration">
 	 <meta name='ROBOTS' content="noindex,nofollow">
  {% endblock %}
 
 {% block title %} {{ parent() }}  {% endblock %}
+ 
 {% block navigsite %}
-       <a href="{{ path('djepoMain_accueil') }}"> {{ parent() }} </a> {{ ' > '~ ' Administration'  }}
-{% endblock %} 
-
+          <ol class="breadcrumb">
+            <li> <a href="{{ path('djepoMain_accueil') }}"> {{ djepo_home }} </a> </li>
+            <li class="active">{{ ' Administration' }} </li>
+        </ol>
+ {% endblock %}
+       
 {% block fos_user_content %}
-    <h1><center>Index de l'administration</h1></center>
-	<p><center>Bienvenue dans votre espace membre.</center><br />
-	
-	   {# On affiche tous les messages flash #}
-	                        
-	            {% if app.session.hasFlash('admin-update') %}
-			    <div class="cadre">
-			        {{ app.session.flash('admin-update') }}
-			        
-			    </div>
-			  {% endif %}
-			  
-			   {% if app.session.hasFlash('admin-pass') %}
-			    <div class="cadre">
-			        {{ app.session.flash('admin-pass') }}
-			    </div>
-			  {% endif %}
-			  
- 	
-
-<br>			  
-	<br>	
-		  
+       {# etape 1 
+	  {% if app.session.hasFlash('admin-update') %}
+		<div class="alert col-sm-12 alert-info"> {{ app.session.flash('admin-update') }}  </div>
+	  {% endif %}
+             
+	 {% if app.session.hasFlash('admin-pass') %}
+		<div class="alert col-sm-12 alert-info"> {{ app.session.flash('admin-pass') }}  </div>
+	 {% endif %}	  
+  	#}
+<h1>Index de l'administration</h1>
+ Bienvenue dans votre espace membre.<br />		  
 {% include "djepoUserBundle:Admin:adminMenu_content.html.twig" %}
 <br><br>
 {% endblock %}

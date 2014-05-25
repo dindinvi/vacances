@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="fr">
+<html>
     <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	{% block meta %} 
                   <meta name="description" content="{{ motscle.description }}">
                   <meta name="keywords" content="{{ motscle.keyword }}">
@@ -11,8 +11,7 @@
             <title>{% block title %}  {% if motscle.titre == '' %} {{ websiteName }}
                       {% else %} {{ websiteName ~' - '~ motscle.titre }}  {% endif %} 
                    {% endblock %}
-            </title>
-                  
+            </title>        
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('bundles/djepobootstrap/css/bootstrap.css') }}" type="text/css" />	 
             <link   href="{{asset('bundles/djepomain/css/style.css')}}" type="text/css" rel="stylesheet" >
@@ -36,54 +35,84 @@
 	
      <body>
         <div class="container">
-            <div class="row">
-                 {% block header %}
-                 <div class="col-lg-4"> logo PAYEMENT{# logo PAYEMENT #}  </div>
-                <div class="col-lg-8">  {# header_droite #} 
-                    <p class=" pull-right">  {% if is_granted("IS_AUTHENTICATED_FULLY") %}  {{ app.user.username }} - 
-                          <a href="{{ path('djepoUser_profile') }}"   rel="nofollow"> Gérer mon compte </a>  |
-                          {# L'utilisateur est-il admin ? #}
-                           {% if is_granted('ROLE_ADMIN') %} <a href="">Administration</a> |  {% endif %}
-                                 <a href="{{ path('fos_user_security_logout') }}"   rel="nofollow">Déconnexion</a> 
-                            {% else %}
-                                     <a href="{{ path('fos_user_inscription_register') }}"   rel="nofollow"> Inscription</a> |
-                                     <a href="{{ path('fos_user_connexion') }}"  rel="nofollow">Connexion</a>
-                            {% endif %}	
-                    </p>
+            
+           {% block header %}
+            <div class="row marginHB">
+                 <div class="hidden-xs col-sm-4"> logo PAYEMENT{# logo PAYEMENT #}  </div>
+                <div class="col-sm-offset-3 col-sm-5">  {# header_droite #} 
+                     <ul class="nav navbar-nav navbar-right"> 
+                                  {% if is_granted("IS_AUTHENTICATED_FULLY") %} 
+                                    <li class="dropdown">
+                                        <a href="{{ path('djepoUser_profile') }}"   rel="nofollow" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }} <b class="caret"></b></a>
+                                             <ul class="dropdown-menu">
+                                               <li><a href="{{ path('fos_user_profile_show', { 'id' : app.user.id })  }}">mon profil</a></li>
+                                             <li class="divider"></li>                                   
+                                            
+                                             <li><a href="{{ path('djepoUser_changeMail') }}">Modifier mon adresse e-mail</a></li>
+                                                  <li><a href="{{ path('fos_user_resetting_request') }}">Modifier mon mot de passe</a></li>
+                                              <li class="divider"></li>
+                                                <li><a href="{{ path('djepoUser_delete', { 'id' : app.user.id })   }}">Supprimer mon compte</a></li>
+                                               <li class="divider"></li>
+                                                <li><a href="">Mes Projets</a></li> 
+                                               <li>{% if is_granted('ROLE_ADMIN') %}<a href="">Administration</a>  {% endif %}</li>
+                                             </ul>
+                                   </li>
+                                   <li>  <a href="{{ path('fos_user_security_logout') }}"   rel="nofollow">Déconnexion</a> </li> 
+                                    
+                                 {% else %}
+                                     
+                                     <li><a href="{{ path('fos_user_inscription_register') }}"   rel="nofollow"> Inscription</a> </li>
+                                     <li><a href="{{ path('fos_user_connexion') }}"  rel="nofollow">Connexion</a></li>
+                                    
+                                 {% endif %}	
+                        </ul> 
                  </div>
+            </div>
                  <div class="clearfix  visible-xs"></div>
-                 <div class="col-lg-4"> 
-                       <a href="{{ path('djepoMain_accueil') }}">
-                             <img src="{{ asset('bundles/djepobootstrap/images/logo.jpg') }}" alt="{{websiteName}}" class="img-responsive">  
-                        </a>
-                </div>
-                 <div class="col-lg-8">    {# PUB LOGEMENT POUR TOUS #}
-                 
-                       <a href="{{ path('djepoMain_accueil') }}">
-                             <img src="{{ asset('bundles/djepobootstrap/images/logo.jpg') }}" alt="{{websiteName}}" class="img-responsive pull-right">  
-                        </a>
-                 </div>
-                 <div class="clearfix  visible-xs"></div>
-                <div class="col-lg-12">
-                    <div class="masthead">
-                        <h3 class="text-muted">Project name</h3>
-                            <ul class="nav nav-justified">
-                                 <li><a href="{{ path('djepoMain_accueil') }}"><b>Accueil</b></a></li>
-                                <li><a href="{{ path('djepoMain_about') }}"><b>Qui nous sommes</b></a></li>
-                                <li><a href="{{ path('djepoMain_contact') }}"  rel="nofollow" ><b>Contact</b></a></li>
-                           </ul>
+                 <div class="row marginHB">
+                    <div class="col-sm-4"> 
+                          <a href="{{ path('djepoMain_accueil') }}">
+                                <img src="{{ asset('bundles/djepobootstrap/images/logo.jpg') }}" alt="{{websiteName}}" class="img-responsive">  
+                           </a>
                    </div>
-                </div>
-               
+                    <div class="hidden-xs col-sm-8">  
+                         <a href="{{ path('djepoMain_accueil') }}">
+                                <img src="{{ asset('bundles/djepobootstrap/images/logo.jpg') }}" alt="{{websiteName}}" class="img-responsive pull-right">  
+                          </a>
+                    </div>
+                  </div>
+                 <div class="clearfix  visible-xs"></div>
+                 <div class="row">               
+                        <div class="col-sm-12">
+                                <nav class="navbar navbar-inverse">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand" href="">Project name</a>
+                                    </div>
+                                    <div class="collapse navbar-collapse">
+                                        <ul class="nav navbar-nav">
+                                         <li><a href="{{ path('djepoMain_accueil') }}"><b>{{ djepo_home }}</b></a></li>
+                                               <li><a href="{{ path('djepoMain_about') }}"><b>Qui nous sommes</b></a></li>
+                                              <li><a href="{{ path('djepoMain_contact') }}"  rel="nofollow" ><b>Contact</b></a></li>
+                                         </ul>
+                                    </div>
+                                </nav>
+                          </div>
+                     </div>
+         
              {% endblock %}    
-                </div>
+              
             <div class="clearfix visible-xs"></div>
-            <div class="row">{# corp body #}
-                 <div class="col-lg-9 navig_prin">
+            <div class="row"> 
+                 <div class="col-sm-10">
                       {% block navigsite %} {% endblock %} 
                       {% block principal %} {% endblock %} 
                 </div>
-                <div class="col-lg-3">
+                <div class="hidden-xs col-sm-2">
                            {% block droite %}  {% include "djepoMainBundle::menuDroite.html.twig" %}    {% endblock %} 
                 </div>
                 
@@ -91,7 +120,7 @@
                 <div class="row">
                     <footer> <p class="text-muted">
                             {% block pied %} Copyright @ 2012. All rights reserveds.<br> 
-                                    Contact: <a href="#">webmaster</a> {# A FAIRE #}
+                                    Contact: <a href="">webmaster</a> 
                         </p> </footer>
                    {% endblock %}
                 </div>

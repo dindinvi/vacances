@@ -1,16 +1,32 @@
-{% extends '::base.html.twig' %}
+{% extends "djepoUserBundle::adminlayout.html.twig" %}
+{% block meta %} 
+	  <meta name="description" content="nouvelles villes">
+	  <meta name='ROBOTS' content="noindex,nofollow">
+ {% endblock %} 
+{% block title %} {{ parent()~' - ' ~ 'Mes coordonnées'  }}  {% endblock %}
+{% block navigsite %} 
+          <ol class="breadcrumb">
+            <li> <a href="{{ path('djepoMain_accueil') }}"> {{ djepo_home }} </a> </li>
+            <li><a  href="{{ path('djepoUser_profile') }}"> Admin </a></li>
+            <li class="active">Mes coordonnées </li>
+        </ol>
+          
+{% endblock %}
 
-{% block body -%}
-    <h1>Ville creation</h1>
+{% block principal %}	
+  {{ parent() }} 
+<br>
 
-    <form action="{{ path('ville_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <p>
-            <button type="submit">Create</button>
-        </p>
-    </form>
+<h1>{{ app.user.username }} : Ville creation</h1>
 
-        <ul class="record_actions">
+<form action="{{ path('ville_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul>
     <li>
         <a href="{{ path('ville') }}">
             Back to the list

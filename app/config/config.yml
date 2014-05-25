@@ -35,6 +35,10 @@ twig:
         djepo_home:              %HOME%
         djepo_contact:           %CONTACT%
         djepo_about:             %ABOUT%
+    #form:
+        #resources:
+            #- '::form_div_layout.html.twig'          
+            #- 'djepoMainBundle:Form:myTheme.html.twig'
         
 # Assetic Configuration
 assetic:
@@ -115,3 +119,9 @@ services:
             userManager: "@fos_user.user_manager"
             validator: "@validator"
             container: "@service_container"
+
+gregwar_captcha: 
+    width: 200
+    height: 50
+    length: 6
+    

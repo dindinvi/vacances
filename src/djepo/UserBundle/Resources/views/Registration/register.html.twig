@@ -3,28 +3,26 @@
     <meta name="description" content="LocationVacancesTogo.com: formulaire d'inscription"> 
     <meta name='ROBOTS' content="noindex, nofollow">
 {% endblock %}
-   {% block stylesheets %}
-       {{ parent() }}
-         <link rel="stylesheet" href="{{ asset('bundles/djepouser/css/sign.css') }}" type="text/css" /> 
-   {% endblock %} 
+ 
           
 {% block title %} {{ parent()  ~' - Demande d\'inscription'  }} {% endblock %}		
 {% block navigsite %} 
         <ol class="breadcrumb">
-            <li> <a href="{{ path('djepoMain_accueil') }}"> {{ parent() }} </a> </li>
+            <li> <a href="{{ path('djepoMain_accueil') }}" > {{ djepo_home }} </a> </li>
             <li class="active">{{ 'Demande d\'inscription.' }} </li>
         </ol>
 {% endblock %}
 
 {% block fos_user_content %}
     {% if is_granted('ROLE_USER') %}
-              <br> <div class="alert alert-info"> Vous êtes déjà connecté.</b>  </div>
+              <br> <div class="alert alert-info"> Vous êtes déjà connecté.</div>
     {% else %}	
         <br><br>
-           <div class="col-lg-offset-3"><h1>Formulaire d'inscription</h1></div> <br>
-           <div class="col-lg-offset-1"> Vous ne possédez pas de compte <b>{{ djepo_home }}</b>? 
+            <h1>Formulaire d'inscription</h1><br>
+           <span> Vous ne possédez pas de compte {{ djepo_home }}? 
               <br>Voici les explications pour créer un compte en 3 minutes: Remplir le formulaire et cliquer sur "créer mon compte".
-              <br>Un message vous sera automatiquement envoyé dans votre boîte e-mail (courriel). <br><br></div>>
+              <br>Un message vous sera automatiquement envoyé dans votre boîte e-mail (courriel). <br><br></span>
+            
           {% include "djepoUserBundle:Registration:register_content.html.twig" %}
 
     {% endif %}	

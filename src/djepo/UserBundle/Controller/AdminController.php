@@ -25,9 +25,7 @@ class AdminController extends Controller
     	if (!is_object($user)) {
     		throw new AccessDeniedException('Vous n\'êtes pas authentifié.');
     	}
-    	// Pour récupérer le service UserManager du bundle
-    	//  $userD = $this->getDoctrine()->getManager()->getRepository('djepoUserBundle:User').
-        //$this->get('fos_user.user_manager')->findUserBy(array('username' => $user));
+      
           
              $user_mail = $user->getEmail();  
              $pers_adr = $user->getAdresse()->getId();
@@ -69,10 +67,9 @@ class AdminController extends Controller
     	 	// Pour récupérer le service UserManager du bundle
     	 	$userManager = $this->get('fos_user.user_manager');
     	 	// Pour charger un utilisateur
-    	 	$user = $userManager->findUserBy(
-                        array(
-    	 		'username' => $this->container->get('security.context')->getToken()->getUser()
-    	 	));
+    	 	//$user = $userManager->findUserBy(
+                        //array(
+    	 		//'username' => $this->container->get('security.context')->getToken()->getUser()	));
     	 	
     	 	// Récupération du service
     	 	$session = $this->get('session');

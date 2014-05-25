@@ -36,7 +36,7 @@ class formContactHandler
 				     return true;
 		   }
 			else {
-				$this->flash->setFlash('blogger-notice', 'ECHEC DE VOTRE CONNEXION');
+				$this->flash->setFlash('warning', 'contact.flash.warning');
 				return false	;	
 			}	
 		}
@@ -47,7 +47,7 @@ class formContactHandler
 	
 	public function onSuccess(formContact $formContact)
 	{
-		$this->flash->setFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
+		$this->flash->setFlash('success', 'contact.flash.success');
 		$this->em->persist($formContact);
 		$this->em->flush();
 	}

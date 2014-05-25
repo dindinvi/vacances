@@ -2,14 +2,28 @@
 
 {% block meta %} {{ parent() }} {% endblock %}
 {% block title %} {{ parent() }} {% endblock %}
-{% block stylesheets %}  {{ parent() }} {% endblock %}
+ 
+
  {% block header %}    {{ parent() }} {% endblock %}
 
 
 {% block navigsite %} <ol class="breadcrumb">  <li class="active">{{ djepo_home }} </li>  </ol>  {% endblock %} 
-{% block principal %}	{% endblock %} 
 
+{% block principal %}{# On affiche tous les messages flash #}
+      {% for label, flashes in app.session.flashbag.all %}
+        {% for flash in flashes %}
+             <div class="{% if label == 'warning'%} alert alert-warning 
+                          {% else %} alert alert-success
+                         {% endif %}">
+           {# <div class="alert alert-{{ label }}"> #}
+                {{ flash |trans({}, 'djepoUserBundle') }}
+            </div>
+        {% endfor %}
+{% endfor %}
+         {% block my_content %}  {% endblock my_content %} 
+         {% block my_djepo_content %}  {% endblock my_djepo_content %} 
+{% endblock %}
 {% block droite %} {% include "djepoMainBundle::menuDroite.html.twig" %} {% endblock %} 
 							
 {% block pied %}   {{ parent() }} 	{% endblock %}
-{% block javascripts %}	 {{ parent() }} {% endblock %}
+ 

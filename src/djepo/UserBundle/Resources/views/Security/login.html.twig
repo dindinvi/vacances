@@ -13,7 +13,7 @@
           
  {% block navigsite %}
           <ol class="breadcrumb">
-            <li> <a href="{{ path('djepoMain_accueil') }}"> {{ parent() }} </a> </li>
+            <li> <a href="{{ path('djepoMain_accueil') }}"> {{ djepo_home }} </a> </li>
             <li class="active">{{ 'Connexion.' }} </li>
         </ol>
  {% endblock %}
@@ -21,14 +21,9 @@
 {% block fos_user_content %}
 
     {% if is_granted('ROLE_USER') %}
-       <br> <div class="alert alert-info"> Vous êtes déjà connecté.</b>  </div>
-   {% else %}	
-           <br>
-           <div class="col-lg-offset-3"> <h1>Formulaire de connexion</h1> </div>		
-           <div class="row">
-               <div class="col-lg-offset-2"> Vous possédez déjà un compte ? Entrez vos codes dans les espaces suivant :<br> </div>				
-<br> <br> 
-               {% if websiteUseFacebookLogin %}
+        <div class="alert alert-info"> Vous êtes déjà connecté. </div>
+   {% else %}  <br>
+           {% if websiteUseFacebookLogin %}
 
                        {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();', 'culture': facebookLocale}) }}
                        <script>
@@ -50,47 +45,58 @@
                        </script>
                {% endif %}
 
-           <div class="col-lg-7"> 
-           {% if error %}
-                   <br>  <div>{{ error|trans([], 'djepoUserBundle') }} </div><br>
-          {% endif %}
-           <br>
+<div class="row">
+     <div class="col-sm-6">
+        <div class="panel panel-default">
+                        <div class="panel-heading">Formulaire de connexion</div>
+                        <div class="panel-body">
 
-              <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
-                           <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                Vous possédez déjà un compte ? Entrez vos codes dans les espaces suivant :<br>				
+                                      {% if error %}  <div class="label label-warning">{{ error|trans([], 'djepoUserBundle') }} </div><br>  {% endif %}
 
-                           <div>
-                               <label for="username" >{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}  <span class="ast">*</span> </label>
-                               <input type="text" id="username" name="_username" size="20" value="{{ last_username }}"  class="form-control" /><br>
-                          </div>
-                          <div>
-                              <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }} <span class="ast">*</span> </label>
-                              <input type="password" id="password" name="_password"  class="form-control" />
-                          </div>
+                                    <div class="row">
+                                      <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+                                                   <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-                         <div>
-                                <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
-                                 <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> <br>
-                         </div>
+                                                   <div>
+                                                       <label for="username" >{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}  <span class="ast">*</span> </label>
+                                                       <input type="text" id="username" name="_username" size="20" value="{{ last_username }}"  class="form-control" /><br>
+                                                  </div>
+                                                  <div>
+                                                      <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }} <span class="ast">*</span> </label>
+                                                      <input type="password" id="password" name="_password"  class="form-control" />
+                                                  </div> 
+                                                 <div>
+                                                        <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+                                                         <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> <br>
+                                                 </div>
+                                                 <div>
+                                                       <input type="submit" class="btn btn-lg btn-primary btn-block" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+                                                </div> 
+                                          </form> 
+                                     </div>  
+                                      <div class="row"> 
+                                          <div class="col-sm-offset-1 col-sm-10"> 
+                                              <div class="panel-footer">
+                                              <a href="{{ path('fos_user_inscription_register') }}" rel="nofollow" >Je ne suis pas inscrit !</a>  <br>
+                                              <a href="{{ path('fos_user_resetting_request') }}"  rel="nofollow" >J'ai oublié mon mot de passe !</a>
+                                           </div>
+                                      </div>
+                                     </div>
+                             </div>
+                       </div>
+             </div>
+         <div class="col-sm-6"> 
+                <div class="panel panel-default">
+                    <div class="panel-heading">Compte facebook</div>
+                    <div class="panel-body">
+                        Vous possédez déjà un compte Facebook? Utilisez le<br>
+                       {% if websiteUseFacebookLogin %}   {{ facebook_login_button({'autologoutlink': false}) }}  {% endif %}
+                    </div>
+             </div>
 
-                        <div>
-                               <input type="submit" class="btn btn-lg btn-primary btn-block" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
-
-                        </div>
-
-                       <br><br>
-               <div>  
-                      <a href="{{ path('fos_user_inscription_register') }}" rel="nofollow" >Je ne suis pas inscrit !</a>  <br>
-                      <a href="{{ path('fos_user_resetting_request') }}"  rel="nofollow" >J'ai oublié mon mot de passe !</a>
-               </div>	
-
-                  </form>  
-               </div>
-
-               <div class="col-lg-offset-1 col-lg-2"> 
-                 {% if websiteUseFacebookLogin %}   {{ facebook_login_button({'autologoutlink': false}) }}  {% endif %}
-                </div>
-       </div>
+         </div>
+   </div>
 
        {% endif %}			
 

@@ -4,16 +4,22 @@
 {% block title %} {{  parent() }} {% endblock %}
 {% block stylesheets %} {{ parent() }}  {% endblock %}
  {% block header %} {{ parent() }} {% endblock %}	
-{% block navigsite %}  {{ djepo_home }} {% endblock %} 
+{% block navigsite %} <ol class="breadcrumb">  <li class="active">{{ djepo_home }} </li>  </ol>  {% endblock %} 
 
 {% block principal %}
-        {% for key, message in app.session.getFlashes() %}
-            <div class="{{ key }}"> {# ajout css pour message en vert #}
-                {{ message|trans({}, 'FOSUserBundle') }}
+     {% for label, flashes in app.session.flashbag.all %}
+        {% for flash in flashes %}
+             <div class="{% if label == 'warning'%} alert alert-warning 
+                          {% else %} alert alert-success
+                         {% endif %}">
+           {# <div class="alert alert-{{ label }}"> #}
+                {{ flash |trans({}, 'djepoUserBundle') }}
             </div>
         {% endfor %}
-        <div> {% block fos_user_content %}  {% endblock fos_user_content %}  </div>
-        <div>  {% block djepo_content %}  {% endblock djepo_content %}</div>
+{% endfor %}
+
+         {% block fos_user_content %}  {% endblock fos_user_content %} 
+         {% block djepo_content %}  {% endblock djepo_content %} 
     
 {% endblock %}
     

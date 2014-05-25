@@ -2,6 +2,10 @@
 {% extends "djepoMainBundle::layout.html.twig" %}
 
 {% block title %} {{ parent()  }}  {% endblock %}
+{% block stylesheets %}  
+{{ parent() }}
+
+ {% endblock %}
 
 {% block navigsite %}
           <ol class="breadcrumb">
@@ -10,15 +14,16 @@
         </ol>
  {% endblock %}
 
-{% block principal %}
-       {# On affiche tous les messages flash #}
+{% block my_content %}
+   
+       {# On affiche tous les messages flash 
 	    {% if app.session.hasFlash('blogger-notice') %}
 		<div class="alert alert-info"> {{ app.session.flash('blogger-notice') }}  </div>
-	     {% endif %}<br> 
-             
+	     {% endif %}
+           #}  
 	  <h1 class="page-header">Contactez-nous.</h1> 
           <div class="row">{# corp body #}
-                 <div class="col-lg-12">
+                 <div class="col-sm-12">
 		<div class="panel-group ">
                     <h2>Notre équipe est à votre écoute.</h2>
                     <div class="panel panel-default">

@@ -1,6 +1,38 @@
-html {
-background-color: #D3D3D0;
+
+body {
+background-color:#bbb;
+color:#048;
+font-size: 12px;
+line-height: 16px;
 }
- .navig_prin { 
+.container {
+background-color: white;
+}
+ .navig_prin,.marginHB { 
      margin-top: 10px;
+}
+ .ast { 
+     color: red;
+}
+
+a{
+color: #028;
+}
+footer {
+text-align:center;
+}
+nav {
+background-color:#bcd;
+border-radius: 8px;
+padding: 0 !important;
+border: 1px solid #ddd;
+margin: 20px 0;
+}
+
+h1 {
+text-shadow: 4px 4px 5px #777;
+color: #449;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+background-color: #cde;
 }

@@ -14,11 +14,13 @@ djepoUser_changeMail:
     requirements:
         format: html
         
+        
 djepoUser_delete:
-    pattern:  /espace-client/modifierMail
-    defaults: { _controller: djepoUserBundle:Admin:modifierMail , format: html }
+    pattern:  /{id}/delete
+    defaults: { _controller: "djepoUserBundle:User:delete" }
     requirements:
-        format: html
+        _method: post
+        id: \d+
         
 fos_user_inscription_register:
     pattern:   /inscription
@@ -27,7 +29,34 @@ fos_user_inscription_register:
 fos_user_connexion:
     pattern:   /connexion
     defaults: { _controller: FOSUserBundle:Security:login }
+    
 
+fos_user_group_list:
+    pattern: /liste
+    defaults : { _controller :FOSUserBundle:Group:list }
+    requirements:
+        _method: GET
+
+fos_user_group_new:
+    pattern: /nouveau
+    defaults : { _controller :FOSUserBundle:Group:new }
+
+fos_user_group_show:
+    pattern: /group
+    defaults : { _controller :FOSUserBundle:Group:show }
+    requirements:
+        _method: GET
+
+fos_user_group_edit:
+    pattern: /group/editer
+    defaults : { _controller :FOSUserBundle:Group:show }
+
+fos_user_group_delete:
+    pattern: /group/supprimer
+    defaults : { _controller :FOSUserBundle:Group:delet }
+    requirements:
+        _method: GET
+        
 #fos_user_logout:
 #    pattern:   /logout
 #    defaults: { _controller: FOSUserBundle:Security:logout }
@@ -45,3 +74,15 @@ djepoUserBundle_ville:
 djepoUserBundle_user:
         resource: "routing/user.yml"
         prefix:   /espace-client/user   
+
+djepoUserBundle_reglement:
+        resource: "routing/reglement.yml"
+        prefix:   /espace-client/reglement
+        
+djepoUserBundle_personne:
+        resource: "routing/personne.yml"
+        prefix:   /espace-client/personne
+        
+djepoUserBundle_facture:
+        resource: "routing/facture.yml"
+        prefix:   /espace-client/facture

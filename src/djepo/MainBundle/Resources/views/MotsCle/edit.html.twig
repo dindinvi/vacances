@@ -1,16 +1,63 @@
+{% extends "djepoUserBundle::adminlayout.html.twig" %}
+{% block meta %} 
+ <meta name="description" content="MotsCle">
+ <meta name='ROBOTS' content="noindex,nofollow">
+ {% endblock %} 
+{% block title %} {{ parent() ~ ' -  MotsCle'  }}  {% endblock %}
+ 
+{% block navigsite %} 
+ 
+<ol class="breadcrumb">
+            <li> <a href="{{ path('djepoMain_accueil') }}"> {{ djepo_home }} </a> </li>
+            <li><a  href="{{ path('djepoUser_profile') }}"> Admin </a></li>
+           <li><a href="{{path('djepoMainBundle_motscle') }}"> Mes MotsCle </a> </li> 
+            <li class="active">MotsCle </li>
+        </ol>
+ 
+{% endblock %}
 
-{% block body -%}
-    <h1>MotsCle edit</h1>
+{% block principal %}	
+  {{ parent() }} 
+<br>
 
-    <form action="{{ path('motscle_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-        <input type="hidden" name="_method" value="PUT" />
-        {{ form_widget(edit_form) }}
-        <p>
-            <button type="submit">Edit</button>
-        </p>
-    </form>
+<h1>{{ app.user.username }} : MotsCle edit</h1>
 
-        <ul class="record_actions">
+<form action="{{ path('motscle_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+        
+        <div class="panel panel-default">
+                <div class="panel-heading"> <h3 >MotsCle edit</h3>  </div>
+                <div class="panel-body"> 
+                       <div class="row form-group">
+                            <div class="col-sm-2">{{ form_label(edit_form.titre) }}</div>
+                            <div class="col-sm-7">{{ form_widget(edit_form.titre, { 'attr': {'class': 'form-control' } }) }}</div>
+                            <div class="col-sm-3"> <span class="text-warning"> {{ form_errors(edit_form.titre) }} </span></div>
+                        </div>
+                                
+                            <div class="row form-group">
+                            <div class="col-sm-2">{{ form_label(edit_form.description) }}</div>
+                            <div class="col-sm-7">{{ form_widget(edit_form.description, { 'attr': {'class': 'form-control' } }) }}</div>
+                            <div class="col-sm-3"> <span class="text-warning"> {{ form_errors(edit_form.description) }} </span></div>
+                        </div>
+                                
+                           <div class="row form-group">
+                            <div class="col-sm-2">{{ form_label(edit_form.robot) }}</div>
+                            <div class="col-sm-7">{{ form_widget(edit_form.robot, { 'attr': {'class': 'form-control' } }) }}</div>
+                            <div class="col-sm-3"> <span class="text-warning"> {{ form_errors(edit_form.robot) }} </span></div>
+                        </div>       
+                                 
+			<div class="row form-group">
+                            <div class="col-sm-2">{{ form_label(edit_form.keyword) }}</div>
+                            <div class="col-sm-7">{{ form_widget(edit_form.keyword, { 'attr': {'class': 'form-control' } }) }}</div>
+                            <div class="col-sm-3"> <span class="text-warning"> {{ form_errors(edit_form.keyword) }} </span></div>
+                        </div>
+                      </div>
+                </div>    
+ 
+     <button type="submit">Edit</button> 
+</form>
+
+<ul class="record_actions">
     <li>
         <a href="{{ path('motscle') }}">
             Back to the list
@@ -18,7 +65,6 @@
     </li>
     <li>
         <form action="{{ path('motscle_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
             <button type="submit">Delete</button>
         </form>
