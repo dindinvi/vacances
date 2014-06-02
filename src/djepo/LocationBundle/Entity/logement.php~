@@ -4,11 +4,13 @@ namespace djepo\LocationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * logement
  *
  * @ORM\Table(name="loca_logement")
  * @ORM\Entity(repositoryClass="djepo\LocationBundle\Entity\logementRepository")
+ * @UniqueEntity(fields="token", message="erreur de token.")
  */
 class logement
 {
@@ -90,7 +92,35 @@ private $propriete;
      */
     private $transport;
 
-
+ /**
+     * @var \DateTime
+     *@Assert\Date()
+     * @ORM\Column(name="dateAnnonce", type="date", nullable=false)
+     */
+     private $dateAnnonce;
+     
+    /**
+     * @var string
+     * @ORM\Column(name="token", type="string", length=255, unique=true)
+     */
+    private $token;
+    
+   
+    
+  /**
+     * @var \DateTime
+     *@Assert\Date()
+     * @ORM\Column(name="dateFinAnnonce", type="date", nullable=true)
+     */
+    private $dateFinAnnonce;
+    
+    /**
+     * @var \DateTime
+     *@Assert\Date()
+     * @ORM\Column(name="dateUpdateAnnonce", type="date", nullable=true)
+     */
+    private $dateUpdateAnnonce;
+    
     /**
      * Get id
      *

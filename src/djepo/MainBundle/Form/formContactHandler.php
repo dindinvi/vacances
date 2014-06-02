@@ -14,8 +14,7 @@ class formContactHandler
 	protected $flash;
 	protected $mailer;
 	
-	
-	public function __construct(Form $form, Request $request, EntityManager $em ,  \Swift_Mailer $mailer )
+      public function __construct(Form $form, Request $request, EntityManager $em ,  \Swift_Mailer $mailer )
 	{
 		$this->form    = $form;
 		$this->request = $request;
@@ -30,10 +29,9 @@ class formContactHandler
 		if( $this->request->getMethod() == 'POST' )
 		{
 			$this->form->bindRequest($this->request);
-
-			if( $this->form->isValid() )	{
-				     $this->onSuccess($this->form->getData());
-				     return true;
+                        if( $this->form->isValid() ){
+				 $this->onSuccess($this->form->getData());
+				 return true;
 		   }
 			else {
 				$this->flash->setFlash('warning', 'contact.flash.warning');
@@ -44,11 +42,11 @@ class formContactHandler
 		return false;
 	}
 
-	
-	public function onSuccess(formContact $formContact)
-	{
-		$this->flash->setFlash('success', 'contact.flash.success');
-		$this->em->persist($formContact);
-		$this->em->flush();
-	}
+    public function onSuccess(formContact $formContact)
+    {
+	$this->flash->setFlash('success', 'contact.flash.success');
+	$this->em->persist($formContact);
+	$this->em->flush();
+    }
+    
 }

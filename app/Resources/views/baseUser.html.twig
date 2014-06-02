@@ -44,8 +44,8 @@
                                             
                                              <li><a href="{{ path('djepoUser_changeMail') }}">Modifier mon adresse e-mail</a></li>
                                                   <li><a href="{{ path('fos_user_resetting_request') }}">Modifier mon mot de passe</a></li>
-                                              <li class="divider"></li>
-                                                <li><a href="{{ path('djepoUser_delete', { 'id' : app.user.id })   }}">Supprimer mon compte</a></li>
+                                              {#   <li class="divider"></li>
+                                                <li><a href="{{ path('personne_showDelete', { 'id' : app.user.personne.id}) }}">Supprimer mon compte</a></li> #}
                                                <li class="divider"></li>
                                                 <li><a href="">Mes Projets</a></li> 
                                                <li>{% if is_granted('ROLE_ADMIN') %}<a href="">Administration</a>  {% endif %}</li>

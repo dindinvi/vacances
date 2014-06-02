@@ -33,8 +33,7 @@ private $personne;
 
     /**
      * @var string
-     * @Assert\NotBlank(message="Veuillez selectionner un type")
-     * @ORM\Column(name="typeProprietaire", type="string", length=50, nullable=false)
+     * @ORM\Column(name="typeProprietaire", type="string", length=50, nullable=true)
      */
     private $typeProprietaire;
 

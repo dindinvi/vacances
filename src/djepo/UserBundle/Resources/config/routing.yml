@@ -71,17 +71,17 @@ djepoUserBundle_ville:
     resource: "routing/ville.yml"
     prefix:   /espace-client/ville
     
-djepoUserBundle_user:
-        resource: "routing/user.yml"
-        prefix:   /espace-client/user   
+#djepoUserBundle_user:
+ #       resource: "routing/user.yml"
+  #      prefix:   /espace-client/user   
 
 djepoUserBundle_reglement:
         resource: "routing/reglement.yml"
         prefix:   /espace-client/reglement
         
-djepoUserBundle_personne:
-        resource: "routing/personne.yml"
-        prefix:   /espace-client/personne
+#djepoUserBundle_personne:
+ #       resource: "routing/personne.yml"
+  #      prefix:   /espace-client/personne
         
 djepoUserBundle_facture:
         resource: "routing/facture.yml"

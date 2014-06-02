@@ -3,7 +3,7 @@
 namespace djepo\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpKernel\Exception;
 use djepo\UserBundle\Entity\Admin;
 use djepo\UserBundle\Form\AdminType;
 use djepo\UserBundle\Form\adminHandler;
@@ -16,7 +16,6 @@ class AdminController extends Controller
 {
     /**
      * Lists all Admin entities.
-     *
      */
     public function indexAction()
     {
@@ -28,13 +27,13 @@ class AdminController extends Controller
       
           
              $user_mail = $user->getEmail();  
-             $pers_adr = $user->getAdresse()->getId();
+             //$pers_adr = $user->getPersonne()->getAdresse()->getId();
     	// Récupération du service
             $session = $this->get('session');
             $session->set('user_name', $user);
      
            $session->set('user_mail', $user_mail );   	
-    	   $session->set('pers_adr',$pers_adr );
+    	  // $session->set('pers_adr',$pers_adr );
     	 
     	$motscle = $this->getDoctrine()->getManager()
     	->getRepository('djepoMainBundle:MotsCle')
@@ -62,25 +61,27 @@ class AdminController extends Controller
     	 		
     	 		);
     	 
-    	 if( $formHandler->process() )	 {
-    	 	
-    	 	// Pour récupérer le service UserManager du bundle
-    	 	$userManager = $this->get('fos_user.user_manager');
-    	 	// Pour charger un utilisateur
-    	 	//$user = $userManager->findUserBy(
-                        //array(
-    	 		//'username' => $this->container->get('security.context')->getToken()->getUser()	));
-    	 	
-    	 	// Récupération du service
-    	 	$session = $this->get('session');
-    	 	// Pour modifier un utilisateur
-    	 	$user->setEmail($session->get('user_mail'));
-    	 	$userManager->updateUser($user);
-    	 	
-    	 	return $this->redirect($this->generateUrl('djepoUser_profile'));
-    	 }
-    	 
-    	 $motscle = $this->getDoctrine()->getEntityManager()
+                if( $formHandler->process() ) {
+
+                       // Pour récupérer le service UserManager du bundle
+                       $userManager = $this->get('fos_user.user_manager');
+                       $session = $this->get('session');
+                     
+                      try{ 
+                            $user->setEmail($session->get('user_mail'));
+                            
+                            $userManager->updateUser($user);
+                              return $this->redirect($this->generateUrl('djepoUser_profile'));
+                      } catch (\Doctrine\DBAL\DBALException $e) {
+                               $this->get('session')->getFlashBag()->clear();
+                               
+                                $this->get('session')->getFlashBag()->add('warning', 'admin.flash.warning');
+                                $this->get('session')->getFlashBag()->add('danger', 'admin.flash.danger');
+                     } 
+                              
+                }
+       
+       $motscle = $this->getDoctrine()->getEntityManager()
     	 ->getRepository('djepoMainBundle:MotsCle')
     	 ->find(7);// administration mail
     	return $this->render('djepoUserBundle:Admin:modifierMail.html.twig',

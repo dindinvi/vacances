@@ -79,11 +79,10 @@ resetting:
         subject: Bienvenue %username% !
         message: |
             Bonjour %username% !
-
+            <br>Vous avez demandé à redéfinir votre mot de passe. 				
             Pour réinitialiser votre mot de passe, merci de vous rendre sur %confirmationUrl%
-
-            Cordialement,
-            L'équipe.
+            <br>Ce mail a été envoyé automatiquement, veuillez ne pas y répondre. <br>Si ce mail vous a été envoyé alors que vous n\'en avez pas fait la demande, ne vous inquiétez pas,
+            personne à part vous ne pourra redéfinir votre mot de passe. Cordialement, L'équipe.
 
 # Global strings
 layout:
@@ -161,9 +160,22 @@ admin:
     flash:
         success: Votre modification à été bien prise en compte.
         warning: Echec de la modification de votre mail
+        danger:  Le email est déjà utilisé par un autre compte.
 
 #modification email
 contact:
     flash:
         success: Votre modification à été bien prise en compte.
         warning: ECHEC DE VOTRE CONNEXION 
+        
+#modification email
+personne:
+    flash:
+        success: Votre compte a bien ete supprimer.
+        warning: Impossible de supprimer votre compte. 
+        
+#modification user
+user:
+    flash:
+        success: Votre compte a bien ete supprimer.
+        warning: Impossible de supprimer votre compte. 

@@ -1,5 +1,5 @@
 {# src/djepo/UserBundle/Resources/views/layout.html.twig #}
-{% extends "::baseUser.html.twig" %}
+{% extends "::base.html.twig" %}
 
 {% block title %} {{  parent() }} {% endblock %}
 {% block stylesheets %} {{ parent() }}  {% endblock %}
@@ -8,12 +8,19 @@
 
 {% block principal %}
      {% for label, flashes in app.session.flashbag.all %}
+          {% if (label == 'fos_user_success')  %}
+              {%   set label='success' %}
+        {% endif %}
         {% for flash in flashes %}
-             <div class="{% if label == 'warning'%} alert alert-warning 
-                          {% else %} alert alert-success
+             {#  <div class="{% if label == 'warning'%} alert alert-warning 
+                          {% elseif  label == 'danger' %} alert alert-danger
+                          {% elseif  label == 'succes' %} alert alert-success
+                          {% else  %} alert alert-info
                          {% endif %}">
-           {# <div class="alert alert-{{ label }}"> #}
-                {{ flash |trans({}, 'djepoUserBundle') }}
+                     #}  
+          <div class="{% if (label == 'warning' or label == 'danger' or label == 'success')  %} alert alert-{{ label }}  {% else  %} alert alert-info{% endif %}">
+              
+                         {{ flash |trans({}, 'djepoUserBundle') }}
             </div>
         {% endfor %}
 {% endfor %}

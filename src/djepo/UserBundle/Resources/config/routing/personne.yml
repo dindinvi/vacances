@@ -28,3 +28,9 @@ personne_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "djepoUserBundle:Personne:delete" }
     requirements: { _method: post|delete }
+
+personne_showDelete:
+    pattern:  /{id}/showDelete
+    defaults: { _controller: "djepoUserBundle:Personne:showDelete" }
+    requirements:
+        id: \d+

@@ -3,8 +3,7 @@
              <div class="panel-body">  
                     <ul class="list-unstyled">
                          <li><a href="{{ path('fos_user_profile_show', { 'id' : app.user.id })  }}">Voir mon profil actuel</a></li> <!-- 'id' : app.user.id-->
-                        <li><a href="{{ path('adresse_show', { 'id' : app.user.personne.adresse.id }) }}">Modifier mes coordonnées</a></li>
-                        <li><a href="{{ path('personne_showDelete', { 'id' : app.user.id}) }}">Supprimer mon compte</a></li>
+                         {#  <li><a href="{{ path('personne_showDelete', { 'id' : app.user.personne.id}) }}">Supprimer mon compte</a></li> #}
                     </ul> 
                 </div>
    </div>

@@ -50,6 +50,8 @@ security:
         - { path: ^/connexion$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/inscription, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/espace-client/.*, role: [IS_AUTHENTICATED_FULLY] }
+        
         # FOS facebook
         - { path: ^/secured/.*, role: [IS_AUTHENTICATED_FULLY] }
         - { path: ^/login_check, role: IS_AUTHENTICATED_ANONYMOUSLY }

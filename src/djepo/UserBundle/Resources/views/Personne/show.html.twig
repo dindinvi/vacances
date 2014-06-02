@@ -13,11 +13,8 @@
           
 {% endblock %}
 
-{% block principal %}	
-       
-  {{ parent() }} 
-<br>
-
+{% block fos_user_content %}	
+   
 <h1>{{ app.user.username }}: Personne</h1>
 
 <div class="row"> 

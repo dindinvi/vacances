@@ -4,11 +4,13 @@ namespace djepo\LocationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * logement
  *
  * @ORM\Table(name="loca_logement")
  * @ORM\Entity(repositoryClass="djepo\LocationBundle\Entity\logementRepository")
+ * @UniqueEntity(fields="token", message="erreur de token.")
  */
 class logement
 {
@@ -90,7 +92,35 @@ private $propriete;
      */
     private $transport;
 
-
+ /**
+     * @var \DateTime
+     *@Assert\Date()
+     * @ORM\Column(name="dateAnnonce", type="date", nullable=false)
+     */
+     private $dateAnnonce;
+     
+    /**
+     * @var string
+     * @ORM\Column(name="token", type="string", length=255, unique=true)
+     */
+    private $token;
+    
+   
+    
+  /**
+     * @var \DateTime
+     *@Assert\Date()
+     * @ORM\Column(name="dateFinAnnonce", type="date", nullable=true)
+     */
+    private $dateFinAnnonce;
+    
+    /**
+     * @var \DateTime
+     *@Assert\Date()
+     * @ORM\Column(name="dateUpdateAnnonce", type="date", nullable=true)
+     */
+    private $dateUpdateAnnonce;
+    
     /**
      * Get id
      *
@@ -330,4 +360,140 @@ private $propriete;
     {
         return $this->cuisine;
     }
+
+    /**
+     * Set dateAnnonce
+     *
+     * @param \DateTime $dateAnnonce
+     * @return logement
+     */
+    public function setDateAnnonce($dateAnnonce)
+    {
+        $this->dateAnnonce = $dateAnnonce;
+
+        return $this;
+    }
+
+    /**
+     * Get dateAnnonce
+     *
+     * @return \DateTime 
+     */
+    public function getDateAnnonce()
+    {
+        return $this->dateAnnonce;
+    }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return logement
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string 
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set dateFinAnnonce
+     *
+     * @param \DateTime $dateFinAnnonce
+     * @return logement
+     */
+    public function setDateFinAnnonce($dateFinAnnonce)
+    {
+        $this->dateFinAnnonce = $dateFinAnnonce;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFinAnnonce
+     *
+     * @return \DateTime 
+     */
+    public function getDateFinAnnonce()
+    {
+        return $this->dateFinAnnonce;
+    }
+
+    /**
+     * Set dateUpdateAnnonce
+     *
+     * @param \DateTime $dateUpdateAnnonce
+     * @return logement
+     */
+    public function setDateUpdateAnnonce($dateUpdateAnnonce)
+    {
+        $this->dateUpdateAnnonce = $dateUpdateAnnonce;
+
+        return $this;
+    }
+
+    /**
+     * Get dateUpdateAnnonce
+     *
+     * @return \DateTime 
+     */
+    public function getDateUpdateAnnonce()
+    {
+        return $this->dateUpdateAnnonce;
+    }
+    
+    
+     /*
+     * public function setTokenValue()
+    {
+        if(!$this->getToken())
+        {
+            $this->token = sha1($this->getEmail().rand(11111, 99999));
+        }
+    }
+      */
+     
+    /**
+     * @ORM\PrePersist
+      */
+    public function setDateAnnonceValue()
+    {
+        if(!$this->getDateAnnonce())
+        {
+            $this->dateAnnonce = new \DateTime();
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setDateUpdateAnnonceValue()
+    {
+        $this->dateUpdateAnnonce = new \DateTime();
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDateFinAnnonceValue()
+        {
+            if(!$this->getDateFinAnnonce())
+            {
+                $now = $this->getDateFinAnnonce() ? $this->getDateFinAnnonce()->format('U') : time();
+                $this->dateFinAnnonce = new \DateTime(date('Y-m-d H:i:s', $now + 86400 * 30));
+            }
+        }
+
+   
 }

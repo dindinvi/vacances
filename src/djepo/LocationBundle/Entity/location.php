@@ -4,13 +4,16 @@ namespace djepo\LocationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * location
  *
  * @ORM\Table(name="loca_location")
  * @ORM\Entity(repositoryClass="djepo\LocationBundle\Entity\locationRepository")
+ * @UniqueEntity(fields="token", message="erreur de token.")
  */
+
 class location
 {
     /**
@@ -55,8 +58,27 @@ private $user;
      * @ORM\Column(name="dateLocation", type="date", nullable=false)
      */
     private $dateLocation;
-
-     /**
+  /**
+     * @var \DateTime
+     *@Assert\Date()
+     * @ORM\Column(name="dateFinLocation", type="date", nullable=true)
+     */
+    private $dateFinLocation;
+     
+    
+    /**
+     * @var \DateTime
+     *@Assert\Date()
+     * @ORM\Column(name="dateUpdateLocation", type="date", nullable=true)
+     */
+    private $dateUpdateLocation;
+    /**
+     * @var string
+     * @ORM\Column(name="token", type="string", length=255, unique=true)
+     */
+    private $token;
+    
+    /**
      * @var \boolean
      *
      * @ORM\Column(name="valide", type="boolean", nullable=true)
@@ -304,4 +326,118 @@ private $user;
     {
         return $this->facture;
     }
+
+    /**
+     * Set dateFinLocation
+     *
+     * @param \DateTime $dateFinLocation
+     * @return location
+     */
+    public function setDateFinLocation($dateFinLocation)
+    {
+        $this->dateFinLocation = $dateFinLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFinLocation
+     *
+     * @return \DateTime 
+     */
+    public function getDateFinLocation()
+    {
+        return $this->dateFinLocation;
+    }
+
+    /**
+     * Set dateUpdateLocation
+     *
+     * @param \DateTime $dateUpdateLocation
+     * @return location
+     */
+    public function setDateUpdateLocation($dateUpdateLocation)
+    {
+        $this->dateUpdateLocation = $dateUpdateLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateUpdateLocation
+     *
+     * @return \DateTime 
+     */
+    public function getDateUpdateLocation()
+    {
+        return $this->dateUpdateLocation;
+    }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return location
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string 
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+    
+    /*
+     * public function setTokenValue()
+    {
+        if(!$this->getToken())
+        {
+            $this->token = sha1($this->getEmail().rand(11111, 99999));
+        }
+    }
+     */
+     
+    
+    /**
+     * @ORM\PrePersist
+     */
+    
+    public function setDateLocationValue()
+    {
+        if(!$this->getDateLocation())
+        {
+            $this->dateLocation = new \DateTime();
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setDateUpdateLocationValue()
+    {
+        $this->dateUpdateLocation = new \DateTime();
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDateFinLocationtValue()
+        {
+            if(!$this->getDateFinLocation())
+            {
+                $now = $this->getDateFinLocation() ? $this->getDateFinLocation()->format('U') : time();
+                $this->dateFinLocation = new \DateTime(date('Y-m-d H:i:s', $now + 86400 * 30));
+            }
+        }
+
+       
 }

@@ -33,12 +33,10 @@ class adminHandler
 			     $this->onSuccess($this->form->getData());
 			     return true;
 		        }
-		 else {
-			 $this->flash->setFlash('warning', 'admin.flash.warning');
-			//etape 2
-                        //$this->flash->setFlash('admin-pass', 'Echec de la modification de votre mail');	 
-                         return false	;	
-			 }	
+                        else {
+                                $this->flash->setFlash('warning', 'admin.flash.warning');
+                                return false	;	
+                                }	
 		}
 
    }
@@ -46,11 +44,10 @@ class adminHandler
 	
 	public function onSuccess(Admin $admin)
 	{
-		
+		//en cas  d erreur le mauvais mot mail est affiche de nouveau
 		$this->flash->set('user_mail',$admin->getNewMail());
-		//etape 2
-                //$this->flash->setFlash('admin-pass', 'Votre modification à été bien prise en compte');
-		$this->flash->setFlash('success', 'admin.flash.success');
+		
+                $this->flash->setFlash('success', 'admin.flash.success');
 		
 	}
 }

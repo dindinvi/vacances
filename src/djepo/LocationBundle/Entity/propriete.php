@@ -39,7 +39,7 @@ private $adresse;
     /**
      * @var \DateTime
      * @Assert\Date()
-     * @ORM\Column(name="dateAcquisition", type="date")
+     * @ORM\Column(name="dateAcquisition", type="date", nullable=true)
      */
     private $dateAcquisition;
 

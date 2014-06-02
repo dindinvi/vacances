@@ -161,12 +161,14 @@ class UserController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');
             }
-
+            $entity_pers = $entity->getPersonne();   
             $em->remove($entity);
+            $em->remove($entity_pers);
             $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'user.flash.success');
         }
 
-        return $this->redirect($this->generateUrl('user'));
+        return $this->redirect($this->generateUrl('fos_user_security_logout'));
     }
 
     /**

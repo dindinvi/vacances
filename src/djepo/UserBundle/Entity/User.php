@@ -5,10 +5,11 @@ use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use djepo\UserBundle\Entity\Personne;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(name="loca_user")
+ *
  */
 class User extends BaseUser
 {
@@ -64,9 +65,7 @@ class User extends BaseUser
         $this->facebookId = $facebookID;        
         if ($this->username=="")    //si on n'a pas de username
         {
-            //on met le facebook id a la place
-            //$this->setUsername($this->firstname);
-            $this->setUsername("VISITOR");
+            $this->setUsername("BIENVENUE");
         }        
     }
 
@@ -84,6 +83,8 @@ class User extends BaseUser
     
     public function setFBData($fbdata, $exist)
     {   
+         
+           
         if (isset($fbdata['id'])) {
             $this->setFacebookID($fbdata['id']);
             $this->addRole('ROLE_FACEBOOK');
@@ -91,8 +92,8 @@ class User extends BaseUser
         /* pas de mise a jour des donnees de l utilisateur
          si la connexion est autorise
          */
-      //if ($exist === false) {
-           // $this->setPersonne(new Personne());
+       if ($exist === false) {
+            $this->setPersonne(new Personne());
             /*
              * $this->getPersonne()->setAdresse(new Adresse);
              $this->getPersonne()->getAdresse()->setVille(new Ville);
@@ -101,14 +102,22 @@ class User extends BaseUser
              */
              if (isset($fbdata['first_name'])) {
                 $this->getPersonne()->setFirstname($fbdata['first_name']); 
+                 $this->setUsername($fbdata['first_name']);
            }
            if (isset($fbdata['last_name'])) {
-               $test = $fbdata['last_name'] .' '.$fbdata['locale'] ;
-             $this->getPersonne()->setLastname( $test);  
+               //$test = $fbdata['last_name'] .' '.$fbdata['locale'] ;
+             $this->getPersonne()->setLastname( $fbdata['last_name']);  
            }
            if (isset($fbdata['gender'])) { 
-               $this->getPersonne()->setTypeEntite($fbdata['gender']);  
+               $genre = $fbdata['gender'];
+               if( $genre == 'male')
+                         $this->getPersonne()->setTypeEntite('Mr'); 
+              else if ( $genre == 'female')
+                      $this->getPersonne()->setTypeEntite('Mme');
+              else
+                     $this->getPersonne()->setTypeEntite('Société');
            }
+           
              if (isset($fbdata['birthday'])) { 
                $this->getPersonne()->setDateN($fbdata['birthday']);  
            }
@@ -116,13 +125,7 @@ class User extends BaseUser
                $this->setEmail($fbdata['email']);
            }
            
-           
-           if (isset($fbdata['middle_name'])) {
-               $this->setUsername($fbdata['middle_name']);
-           }
-           
-         
-     //}
+      }
      
         
         

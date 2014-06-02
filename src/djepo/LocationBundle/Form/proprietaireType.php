@@ -1,8 +1,8 @@
 <?php
 
 namespace djepo\LocationBundle\Form;
-namespace djepo\LocationBundle\Form\Type;
-namespace djepo\UserBundle\Form;
+use djepo\LocationBundle\Form\Type;
+use djepo\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +18,7 @@ class proprietaireType extends AbstractType
                             'required'  => true,
                           'label' => 'type de proprietaire',
                         ))
-            ->add('user', new UserType())
+            ->add('personne', new PersonneType())
         ;
     }
 

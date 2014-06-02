@@ -161,12 +161,17 @@ class PersonneController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Personne entity.');
             }
-
-            $em->remove($entity);
-            $em->flush();
+            
+           //$myUser = $entity->getUser();
+            //$em_user = $this->get('fos_user.user_manager');
+            // $this->get('fos_user.user_manager')->deleteUser($myUser);
+             
+           $em->remove($entity);
+           $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'personne.flash.success');
         }
 
-        return $this->redirect($this->generateUrl('personne'));
+        return $this->redirect($this->generateUrl('fos_user_security_logout'));
     }
 
     /**
@@ -182,5 +187,24 @@ class PersonneController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+    public function showDeleteAction(Personne $entity)
+    {
+    	 
+    	$user = $this->container->get('security.context')->getToken()->getUser();
+    	if (!is_object($user)) {
+    		throw new AccessDeniedException('Vous n\'êtes pas authentifié.');
+    	}
+    
+    	if ($user != $entity->getUser()->getUsername()) {
+    		throw $this->createNotFoundException('Vous n\'êtes pas authentifié sous le bon speudo!');
+    	}
+    
+    	$deleteForm = $this->createDeleteForm($entity->getId());
+    
+    	return $this->render('djepoUserBundle:Personne:delete.html.twig', array(
+    			'entity'      => $entity,
+    			'delete_form' => $deleteForm->createView(),
+    	));
     }
 }
